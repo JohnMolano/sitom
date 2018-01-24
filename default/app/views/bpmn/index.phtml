@@ -1,0 +1,266 @@
+<?php View::content(); ?>
+
+ <style type="text/css">
+
+    html, body, #canvas {
+      height: 100%;
+      padding: 0;
+    }
+
+    #modalLateral {
+      position: absolute;
+      top: 100px;
+      right: 20px;
+
+      border: solid 5px green;
+    }
+
+    #save-overlays {
+      position: absolute;
+      top: 20px;
+      right: 180px;
+
+      border: solid 5px green;
+    }
+
+    .form, #form{
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      z-index: 10;
+    }
+
+    .contenBoton{
+      position: absolute;
+      top: 100px;
+      right: 20px;
+      z-index: 10;
+    }
+
+    .diagram-note {
+      background-color: #ff0060;
+      color: White;
+      border-radius: 5px;
+      font-family: Arial;
+      font-size: 12px;
+      padding: 5px;
+      min-height: 16px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .needs-discussion:not(.djs-connection) .djs-visual > :nth-child(1) {
+      stroke: #ff0060 !important; /* color elements as red */
+    }
+
+
+
+.logo-omolds2
+    {
+      font-family: "IconOmolds";
+      font-style: normal;
+      font-weight: normal;
+      speak: none;
+      display: inline-block;
+      text-decoration: inherit;
+      width: 1em;
+      margin-right: .2em;
+      text-align: center;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1em;
+      margin-left: .2em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      color:#ff0060;
+      font-size: 50px;
+    }
+    
+
+  </style>
+ <!-- element to draw bpmn diagram in -->
+
+
+  <div id="canvas"></div>
+  <div id="properties"></div>
+<button id="save-overlays" style="display: none;">Json overlays</button>
+
+  <div class="pull-right contenBoton">
+            <div class="container col-1 pull-right">
+                <div class="row padMar cajonBotonCuadradoPequeno text-center pull-right">
+                    <div class="col-xl-12 padMar icon"><a href="#" data-toggle="collapse" data-target="#form"><i class="fa fa-upload"></i></a></div>
+                </div>
+                <div class="row padMar cajonBotonCuadradoPequeno text-center pull-right">
+                    <div class="col-xl-12 padMar icon"><a href="#" id="save-button"><i class="fa fa-save"></i></a></div>
+                </div>
+                <div class="row padMar cajonBotonCuadradoPequeno text-center pull-right">
+                    <div class="col-xl-12 padMar icon"><a href="#" id="btnzoomin"><i class="fa fa-search-plus"></i></a></div>
+                </div>
+                <div class="row padMar cajonBotonCuadradoPequeno text-center pull-right">
+                    <div class="col-xl-12 padMar icon"><a href="#" id="btnzoomout" ><i class="fa fa-search-minus"></i></a></div>
+                </div>
+                <div class="row padMar cajonBotonCuadradoPequeno text-center pull-right">
+                    <div class="col-xl-12 padMar icon"><a href="#"><i class="fa fa-dot-circle-o"></i></a></div>
+                </div>
+                <div class="row padMar cajonBotonCuadradoPequeno text-center pull-right">
+                    <div class="col-xl-12 padMar icon"><a href="#"><i class="fa fa-trash"></i></a></div>
+                </div>
+            </div>
+        </div>
+    <div class="col-12 col-sm-10 col-md-10 col-lg-12 col-xl-9 d-flex flex-wrap padMar mx-auto form" >
+      <form id="form" action="javascript: mandarForm(this)" method="POST" enctype="multipart/form-data"  class="collapse">
+        <span></span>
+        <label class="custom-file" id="customFile">
+          <input type="file" class="custom-file-input" name="bpmn" id="bpmn" style="margin-top:5px;" aria-describedby="fileHelp">
+          <span class="custom-file-control form-control-file"></span>
+        </label>
+        <input  class="btn btn-primary btn-Oscuro" type="submit" value="UPLOAD"  />
+      </form>
+    </div>
+         
+ 
+  <script >
+   
+    function mandarForm(form){
+      
+      var form = document.forms.namedItem("form");
+      form.addEventListener('submit', function(ev) {
+
+        var oOutput = document.querySelector("span"),
+            oData = new FormData(form);
+
+        oData.append("CustomField", "This is some extra data");
+
+        var oReq = new XMLHttpRequest();
+        oReq.open("POST", "upload.php", true);
+        oReq.onload = function(oEvent) {
+          if (oReq.status == 200) {
+            
+            var myArr = JSON.parse(oReq.responseText);
+            if(myArr.ok){
+               oOutput.innerHTML = "Uploaded!";
+               $.get('bpmnUp/'+myArr.archivo, importXML, 'text');
+            }else{
+               oOutput.innerHTML = "Error";
+              
+            }
+           
+          } else {
+            oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
+          }
+        };
+
+        oReq.send(oData);
+        ev.preventDefault();
+      }, false);
+
+}
+  
+
+    
+    $(document).ready(function() {
+      //alert("<?= $xmlCorecto ?>");
+      if("<?= $xmlCorecto ?>" == 'true'){
+        importXML('<?= $xml ?>');
+      }else{
+        loadXMLDoc('<?=APP_PAGE_OMOLDS;?>bpmn-js-seed-master/diagram.bpmn');
+      }
+
+      var zoomlevel = 1;
+
+      $("#btnzoomin").on("click", function () {
+       
+          var canvas = bpmnViewer.get('canvas');       
+          canvas.zoom(canvas._cachedViewbox.scale+zoomlevel);
+        
+
+      });
+
+      $("#btnzoomout").on("click", function () {
+        
+          var canvas = bpmnViewer.get('canvas'); 
+          canvas.zoom(canvas._cachedViewbox.scale-zoomlevel);
+        
+      });
+     
+    });
+
+    function guardaXml(xml){
+          var formData = {id_om:'<?= $id_xml; ?>',  user_id_om:'<?= $listData->{$id}['base']['user_id_om']; ?>', key_om:'<?= $listData->{$id}['base']['key_om']; ?>', group_om:'<?= $listData->{$id}['base']['group_om']; ?>', value_om:xml,table_om:'<?= $listData->{$id}['base']['table_om']; ?>'};
+          $.ajax({
+            url : "<?=APP_PAGE_OMOLDS;?><?= RENDER_URL['controller'];?>/edit/<?= $id ?>",
+            type: "POST",
+            dataType: "json",
+            data : formData,
+            success: function(data, textStatus, jqXHR)
+            {
+              if(data.idError == 0){
+                console.log(data.descripcion);
+              }else{
+                console.log(data.descripcion);  
+              }
+            }
+          });
+
+    }
+
+    function guardaScrum(idElemento){
+          var formData = {id_om:'<?= $listData->id[$id][1]; ?>',  user_id_om:'<?= $listData->user_id_om[$id][1]; ?>', key_om:'<?= $listData->key_om[$id][1]; ?>', group_om:'<?= $listData->group_om[$id][1]; ?>', value_om:xml};
+          $.ajax({
+            url : "<?=APP_PAGE_OMOLDS;?><?= RENDER_URL['controller'];?>/edit/<?= $id ?>",
+            type: "POST",
+            dataType: "json",
+            data : formData,
+            success: function(data, textStatus, jqXHR)
+            {
+              if(data.idError == 0){
+                console.log(data.descripcion);
+              }else{
+                console.log(data.descripcion);  
+              }
+            }
+          });
+
+    }
+
+  </script>
+
+
+<!-- Modal -->
+<div class="modal right fade" id="modalScrum" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel2">SCRUM</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Titulo Pool</label>
+                    <input type="text" class="form-control" id="tituloPool" aria-describedby="tituloHelp" placeholder="ingrese titulo" disabled="disabled">
+                    <small id="tituloHelp" class="form-text text-muted">titulo del history user</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleTextarea">Descripción Pool</label>
+                    <textarea class="form-control" id="descripcionPool" aria-describedby="descripcionHelp" rows="3"></textarea>
+                    <small id="descripcionHelp" class="form-text text-muted">descripción del history user</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Tiempo Desarrollo Pool</label>
+                    <input type="text" class="form-control" id="tiempoPool" aria-describedby="tiempoHelp" placeholder="ingrese tiempo">
+                    <small id="tiempoHelp" class="form-text text-muted">Tiempo que toma desarrollar el proceso del pool</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Costo Desarrollo Pool</label>
+                    <input type="text" class="form-control" id="costoPool" aria-describedby="costoHelp" placeholder="ingrese costo">
+                    <small id="costoHelp" class="form-text text-muted">Costo del desarrollar del pool</small>
+                  </div>
+                </form>  
+            </div>
+
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->

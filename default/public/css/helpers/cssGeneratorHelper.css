@@ -1,0 +1,362 @@
+.padMar {
+  margin:0;
+  padding:0;
+}
+
+p, span, div, row, column, a, header {
+  font-family:'Roboto';
+  font-size:13px;
+}
+
+body {
+  background-color:#223D8D;
+}
+
+.footerOmolds {
+  z-index:9;
+  width:100%;
+  background-color:#ffffff;
+  text-align:center;
+  color:#878787;
+  position:fixed;
+  bottom:0px;
+  padding-top:8px;
+  padding-bottom:8px;
+  margin-bottom:0px !important;
+}
+
+.footerOmolds p {
+  margin:0px;
+}
+
+.footerOmolds a {
+  color:#878787;
+}
+
+.footerOmolds a:hover {
+  color:#456BCD;
+}
+
+.headerOmolds {
+  background-color:#ffffff;
+  margin:0;
+  padding:0;
+  padding:18px;
+}
+
+.headerOmolds span {
+  font-size:37px;
+  padding:0;
+  margin:0;
+  width:auto;
+  font-family:roboto;
+  text-transform:uppercase;
+}
+
+.headerOmolds h1 {
+  margin:0;
+  padding:0;
+}
+
+.headerOmolds .iconProducto {
+  height:50px;
+  width:50px;
+  position:absolute;
+  margin-left:-65px;
+  fill:#456BCD;
+}
+
+.headerOmolds .tituloProductoOM {
+  font-family:'Barlow Semi Condensed', sans-serif;
+  color:#456BCD;
+  letter-spacing:-2px;
+}
+
+.headerOmolds .tituloProducto {
+  font-family:'Barlow Semi Condensed', sans-serif;
+  color:#808485;
+  letter-spacing:-2px;
+}
+
+.txtsBlancos {
+  color:#fff;
+  text-align:center;
+}
+
+.txtsAzules {
+  color:#222f7d;
+  text-align:center;
+}
+
+.txtsBlancos.titCalifique {
+  margin-top:7px;
+  margin-bottom:7px;
+}
+
+.headerAgenteMovil {
+  padding:12px;
+  background-color:#223D8D;
+}
+
+.cajaEscribaMensaje {
+  padding:12px;
+  background-color:#F8D600;
+  /*text-align:center;*/
+}
+
+.btn-toolbar {
+  text-align:center;
+  /*background-color:#f1f1f1;*/
+  margin-bottom:64px;
+}
+
+.margenBotones {
+  margin-bottom:60px;
+}
+
+.modalBienvenida {
+  background-color:#fff;
+  z-index:80;
+  position:absolute;
+  height:100%;
+  width:100%;
+  text-align:center;
+  padding-top:220px;
+  display:block;
+}
+
+.modalAyudaventas {
+  z-index:65;
+  position:absolute;
+  text-align:center;
+  width:100%;
+  top:20%;
+}
+
+.videoUsuario {
+  z-index:10;
+  width:auto;
+  border:solid 1px #fff;
+}
+
+@media only screen and (max-width: 768px) {
+  .videoUsuario img, .videoUsuario video {
+    width:130px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .videoUsuario {
+    position:absolute;
+  }
+}
+
+.videoUsuario img, .videoUsuario video {
+  width:100%;
+}
+
+.videoAgente {
+  z-index:1;
+  /*padding:11px;*/
+}
+
+.modalCompleta {
+  background-color:#223D8D;
+  color:#fff;
+  z-index:60;
+  position:absolute;
+  width:auto;
+  height:100%;
+  /*opacity:0.96;*/
+}
+
+.modalCompleta .txtGrande {
+  margin-top:-50px;
+  margin-bottom:-39px;
+  padding-right:20px;
+  padding-left:20px;
+}
+
+.modalCompleta .cajaIcono {
+  text-align:center;
+  font-size:200px;
+}
+
+.modalCompleta .txtsAmarillos a:hover {
+  color:#FFFF9B;
+}
+
+.modalCompleta .txtsAmarillos {
+  color:#F8D600;
+}
+
+.modalCompleta .url {
+  padding-bottom:29px;
+  padding-right:20px;
+  padding-left:20px;
+}
+
+.txtsChat {
+  width:90%;
+  height:auto;
+  z-index:40;
+  color:#ffffff;
+  position:absolute;
+  bottom:80px;
+  text-shadow:2px 2px 6px #000000;
+}
+
+.sombraChat {
+  width:100%;
+  height:20%;
+  z-index:39;
+  position:absolute;
+  background-color:#000000;
+  opacity:0.4;
+  display:block;
+  top:53%;
+}
+
+.txtsChat p {
+  margin-bottom:0;
+}
+
+.sombraModales {
+  background-color:#fff;
+  width:100%;
+  position:absolute;
+  height:100%;
+  z-index:50;
+  opacity:0.9;
+  color:#fff;
+  display:block;
+  top:0;
+}
+
+.modalStickers {
+  background-color:#223D8D;
+  position:absolute;
+  z-index:80;
+  width:250px;
+  height:250px;
+  border-radius:41em;
+  color:#fff;
+  display:block;
+  top:20%;
+}
+
+.modalStickers .icon {
+  color:#fff;
+  font-size:92px;
+}
+
+.modalStickers p {
+  margin-top:-14px;
+  padding-left:5px;
+  padding-right:5px;
+}
+
+a {
+  color:#F8D600;
+}
+
+a:hover {
+  color:#FFFF9B;
+}
+
+
+.btn {
+  cursor:pointer;
+  font-size:small;
+  font-weight:bold;
+}
+
+.btnClaro {
+  color:#223D8D;
+  background-color:#FFFFFF;
+  border-color:#F2F2F2;
+  margin:1px;
+}
+
+.btnClaro:hover, .btnClaro:focus, .btnClaro:active, .btnClaro.active, .open .dropdown-toggle.btnClaro {
+  color:#223D8D !important;
+  background-color:#e3e3e3 !important;
+  border-color:#F2F2F2;
+  box-shadow:0 0 0 0.2rem rgba(0,123,255,0);
+}
+
+.btnClaro:active, .btnClaro.active, .open .dropdown-toggle.btnClaro {
+  background-image:none;
+}
+
+.btnClaro.disabled, .btnClaro[disabled], fieldset[disabled] .btnClaro, .btnClaro.disabled:hover, .btnClaro[disabled]:hover, fieldset[disabled] .btnClaro:hover, .btnClaro.disabled:focus, .btnClaro[disabled]:focus, fieldset[disabled] .btnClaro:focus, .btnClaro.disabled:active, .btnClaro[disabled]:active, fieldset[disabled] .btnClaro:active, .btnClaro.disabled.active, .btnClaro[disabled].active, fieldset[disabled] .btnClaro.active {
+  background-color:#FFFFFF;
+  border-color:#F2F2F2;
+}
+
+.btnOscuro {
+  color:#FFFFFF;
+  background-color:#223D8D;
+  border-color:#F2F2F2;
+  margin:1px;
+}
+
+.btnOscuro:hover, .btn-Oscuro:focus, .btn-Oscuro:active, .btn-Oscuro.active, .open .dropdown-toggle.btn-Oscuro {
+  color:#FFFFFF;
+  background-color:#3762E3;
+  border-color:#F2F2F2;
+  box-shadow:0 0 0 0.2rem rgba(0,123,255,0);
+}
+
+.btnOscuro:active, .btn-Oscuro.active, .open .dropdown-toggle.btn-Oscuro {
+  background-image:none;
+}
+
+.btnOscuro.disabled, .btn-Oscuro[disabled], fieldset[disabled] .btn-Oscuro, .btn-Oscuro.disabled:hover, .btn-Oscuro[disabled]:hover, fieldset[disabled] .btn-Oscuro:hover, .btn-Oscuro.disabled:focus, .btn-Oscuro[disabled]:focus, fieldset[disabled] .btn-Oscuro:focus, .btn-Oscuro.disabled:active, .btn-Oscuro[disabled]:active, fieldset[disabled] .btn-Oscuro:active, .btn-Oscuro.disabled.active, .btn-Oscuro[disabled].active, fieldset[disabled] .btn-Oscuro.active {
+  background-color:#CE351;
+  border-color:#F2F2F2;
+}
+
+.btn-primary:not([disabled]):not(.disabled).active, .btn-primary:not([disabled]):not(.disabled):active, .show > .btn-primary.dropdown-toggle {
+  color:#fff;
+  background-color:#3762E3;
+  border-color:#ffffff;
+  box-shadow:0 0 0 0.2rem rgba(0,123,255,0);
+}
+
+
+
+.cajaOscuraConMargenes {
+  background-color:#223d8d;
+  margin:15px;
+  padding:19px;
+}
+
+.cajaClaraConMargenes {
+  background-color:#ffffff;
+  margin:15px;
+  padding:19px;
+}
+
+.titulosMargin {
+  margin:10px;
+}
+
+.subtitulosMargin {
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.espacioBottom {
+  margin-bottom:20px;
+  height:40px;
+}
+
+
+iframe {
+  width:100%;
+  height:120%;
+  border:none;
+  overflow:hidden;
+}
+

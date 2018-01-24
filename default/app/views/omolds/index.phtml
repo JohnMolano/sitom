@@ -1,0 +1,241 @@
+<?php View::content(); ?>
+    <div class="row mx-auto" >
+        <?php View::partial('menu', false,  array('activo'=>$activo)) ?>
+        <div class="col-12 col-lg-8 col-xl-8 colorCajasBlancas mx-auto">
+            <div class="row">
+                <div class="col">
+                    <h4 class="modal-title"><?= ucfirst(RENDER_URL['controller']);?></h4>
+                    <p class="txtsGrises">
+                        En esta sección podrás realizar con la metodología de CRUD, la Creacion, Lectura, Actualizacion y eliminación de <?= RENDER_URL['controller'];?>. 
+                        <span class="txtsOscurosColor">
+                            <strong>Recuerda que los usuarios son perfilados</strong> 
+                        </span>
+                    </p>
+                    <div
+                        class="row">
+                        <div class="col">
+                            <table class="table table-responsive txtsGrises pasos">
+                                <thead>
+                                    <tr>
+                                        <th> </th>
+                                        <?php $i=0;  foreach ($listData->column_om as $idCol => $itemCol) : ?>
+                                        <?php  $i2=0; foreach ($itemCol as $item) : ?>
+                                          <?php if($i >= 1){ ?>
+                                             <th class="d-none d-lg-block"><?= strtoupper($item) ?></th>
+                                          <?php  }else{ ?>
+                                              <?php if ($item == "join"){ ?>
+                                                  <th><?= strtoupper($listOmolds->value_om[$keyOmolds][$i2]) ?></th>
+                                              <?php  }else{ ?>  
+                                                  <th><?= strtoupper($item) ?></th>
+                                              <?php  } ?>
+
+                                            
+                                          <?php  } ?>
+                                          <?php if ($item === end($itemCol)){ ?>
+                                            <th>OPTIONS </th>
+                                          <?php  } ?> 
+                                        <?php   $i2++; endforeach; break; ?>
+                                        <?php $i++; endforeach; ?>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $i=0; foreach ($listData->value_om as $idVal => $itemVal) : ?>
+                                    <tr>
+                                      <td><input type="checkbox"></td>
+                                      <?php $i=0; foreach ($itemVal as $count => $item) : ?>
+                                          <?php $data .= "data-".$listData->column_om[$idVal][$count]."='".ucfirst($item)."' " ?>
+
+                                          <?php if($i === 0){ ?>
+                                          <?php $data .= " data-name='".ucfirst($item)."'" ?>  
+                                          <?php } ?>
+
+                                          <?php if($i >= 4){ ?>
+                                             <td class="d-none d-lg-block"><?= ucfirst($item) ?></td>
+                                          <?php  }else{ ?>
+                                              <?php  if ($listData->column_om[$idVal][$count] == "icon"){ ?>
+                                                  <td><span class="<?= $item ?>"></span></td>
+                                              <?php  }else{ ?>  
+                                                  <td><?= ucfirst($item) ?></td>
+                                              <?php  } ?>  
+                                            
+                                          <?php  } ?>
+                                          <?php if ($item === end($itemVal)){ ?>
+                                            <td><button class="btn btn-primary btn-sm btn-Oscuro" type="button" data-toggle="modal" data-target="#modalOption" data-id="<?= $idVal ?>" <?= $data ?> ><i class="icon ion-ios-more"></i></button> </td>
+                                          <?php  } ?> 
+                                      <?php $i++;  endforeach; ?>
+                                    </tr> 
+                                     <?php $data = ""; endforeach; ?>
+                                   
+                                    </ul>
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <nav class="pagination justify-content-left">
+                            <ul class="pagination">
+                                   <!-- ejemplo manual de paginador, hay partial listos en formato digg, clasic,.... -->
+                                    <?php if($listData->prev){ ?>
+                                         <li class="page-item"><a class="page-link" aria-label="Previous" href="<?=APP_PAGE_OMOLDS;?><?= RENDER_URL['controller'];?>/<?= RENDER_URL['action']; ?>/<?= $listData->prev ?>"><span aria-hidden="true">«</span></a></li>
+                                    <?php } ?>
+                                     <!--li class="page-item active"><a class="page-link">1</a></li-->
+                                    <?php if($listData->next){ ?>
+                                         <li class="page-item"><a class="page-link" aria-label="Next" href="<?=APP_PAGE_OMOLDS;?><?= RENDER_URL['controller'];?>/<?= RENDER_URL['action']; ?>/<?= $listData->next ?>"><span aria-hidden="true">»</span></a></li>
+                                    <?php } ?>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"><a class="btn btn-primary btn-circle btnCircular" role="button" href="<?=APP_PAGE_OMOLDS;?><?= RENDER_URL['controller'];?>/create/<?= $categoria; ?>/<?= $idCategoria; ?>" data-bs-hover-animate="tada">+</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+<!-- Modales -->
+<div class="modal fade" id="modalOption" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" style="z-index: 1300;">
+    <div class="modal-dialog modalInferior" role="document" style="max-width: 100%">
+        <div class="row padMar colorCajasBlancas modalInferior">
+            <div class="col modal-content">
+                <div class="row">
+                    <div class="col modal-header">
+                        <h4 class="modal-title">Options </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col modal-body">
+                        <div class="row">
+                            <div class="col"><a id="omoldsOption" href="<?=APP_PAGE_OMOLDS;?>omolds/<?= RENDER_URL['controller'];?>/id" <?= $data ?> data-id="0" ><i class="logo-omolds"></i> OMolds </a></div>
+                        </div>
+                        <div class="row">
+                            <div class="col"><a id="viewption" href="#" data-toggle="modal" data-target="#modalView" <?= $data ?> data-id="0" ><i class="fa fa-eye"></i> View </a></div>
+                        </div>
+                        <div class="row">
+                            <div class="col"><a id="editOption" <?= $data ?> data-id="0" href="#"><i class="icon ion-edit"></i> Edit </a></div>
+                        </div>
+                        <div class="row">
+                            <div class="col"><a id="delOption" href="#" data-toggle="modal" data-target="#modalEliminar" <?= $data ?> data-id="0"><i class="fa fa-trash"></i> Delete </a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- modal-content -->
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+
+<!-- Modal de borrar-->
+<form id="eliminar-alert" method="post" action="<?=APP_PAGE_OMOLDS;?><?= RENDER_URL['controller'];?>/del" class="contact-form form">
+<div id="modalEliminar" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width:60%;">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">DELETE </h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Estas seguro de eliminar el registro</p>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" name="key_om_id" id="key_om_id"  required="required">
+        <div class="row">
+          <div class="col-12">
+            <div class="col-md-6"><button type="submit" class="btn btn-primary btn-Oscuro">DELETE</button></div>
+       
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+<div class="modal fade centro" role="dialog" tabindex="-1" id="modalView">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title txtsGrises">VIEW </h6><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+            <div class="modal-body">
+                <h2 class="titulos"><?= ucfirst(RENDER_URL['controller']);?></h2>
+                <p class="text-left margenesEspacio">Write your information to be part of our community and have access to the system. </p>
+                <div class="col padMar">
+                    <?php $i=0; foreach ($listData->column_om as $itemCol) : ?>
+                    <?php  foreach ($itemCol as $item) : ?>
+                      <input type="text" id="vw_<?= $item ?>" value="<?= $item ?>" class="margenesEspacio inputLargo" disabled>
+                    <?php   endforeach; break; ?>
+                    <?php $i++; endforeach; ?>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$('#modalOption').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var id = button.data('id');
+  var name = button.data('name');
+  var data_om = button.data();
+  var modal = $(this)
+ // modal.find('.modal-title').text('Options for ' + name);
+  modal.find('#editOption').attr("href", "<?=APP_PAGE_OMOLDS;?><?= RENDER_URL['controller'];?>/edit/"+id);
+  modal.find('#omoldsOption').attr("href", "<?=APP_PAGE_OMOLDS;?>omolds/<?= RENDER_URL['controller'];?>/"+name+"/"+id);
+  modal.find('#delOption').data("id", id);
+  modal.find('#viewption').data("id", id);
+  modal.find('#viewption').data("name", name);
+  modal.find('#delOption').data("name", name);
+ 
+  var cont = 0;
+  $.each( data_om, function( i, val ) {
+    if(i != 'target' &&  i != 'toggle'){
+      //console.log(val);
+      modal.find('#viewption').data(i, val);
+
+    }
+  });
+
+});
+
+$('#modalView').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var id = button.data('id');
+  var name = button.data('name');
+  var data_om = button.data();
+  var modal = $(this);
+  modal.find('.modal-title').text('View for ' + name);
+  var cont = 0;
+  $.each( data_om, function( i, val ) {
+    if(i != 'target' &&  i != 'toggle'){
+      //console.log(val);
+      modal.find('#vw_'+i).val(val);
+
+    }
+  }); 
+  $('#modalOption').modal('hide');
+});
+
+$('#modalEliminar').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var id = button.data('id');
+  var name = button.data('name');
+  var modal = $(this)
+  modal.find('.modal-title').text('Delete for ' + name);
+  modal.find('#key_om_id').val(id);
+  $('#modalOption').modal('hide');
+});
+</script>

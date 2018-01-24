@@ -1,0 +1,74 @@
+<?php View::content(); ?>
+    <div class="row mx-auto" >
+        <?php View::partial('menu', false,  array('activo'=>$activo)) ?>
+        <div class="col-12 col-lg-8 col-xl-8 colorCajasBlancas mx-auto">
+            <div class="row">
+                <div class="col">
+                    <h4 class="modal-title">Usuario </h4>
+                    <p class="txtsGrises">
+                        Para crear un usuario deber llenar todo el formulario. 
+                        <span class="txtsOscurosColor">
+                            <strong>Recuerda que los usuarios son perfilados</strong> 
+                        </span>
+
+                    </p>
+                    <div class="row margenesTxts" >
+                        <div class="col margenesTxts">
+                            <div class="col padMar">
+                                <form id="contact-form" method="post" action="<?=APP_PAGE_OMOLDS;?>usuarios/create" class="contact-form form" accept-charset="UTF-8">
+                                <label class="margenesTxts">Name</label>
+                                <input type="text" placeholder="Name" class="margenesEspacio inputLargo" id="user_om_firstName" name="user_om[firstName]"  required >
+
+                                <label class="margenesTxts">Lastname</label>
+                                <input type="text" placeholder="Lastname" class="margenesEspacio inputLargo" id="user_om_lastName" name="user_om[lastName]" required >
+
+                                <label class="margenesTxts">Email</label>
+                                <input type="text" placeholder="Email " class="margenesEspacio inputLargo" id="user_om_email" name="user_om[email]"  required >
+
+                                <label class="margenesTxts">Create a password</label>
+                                <input type="password" placeholder="Create a password" class="margenesEspacio inputLargo" id="user_om_password" name="user_om[password]" required >
+
+                                <label class="margenesTxts">Confirm your password</label>
+                                <input type="password" placeholder="Confirm your password" class="margenesEspacio inputLargo" id="user_om_password2" required >
+
+                                <label class="margenesTxts">Mobile phone</label>
+                                <input type="tel" placeholder="Mobile phone" class="margenesEspacio inputLargo" id="user_om_phone" name="user_om[phone]"  required >
+
+                                <input type="hidden"  name="user_om[active]" value="S">
+
+                                <div class="col-12 text-center margenesTxts">
+                                   <button class="btn btn-primary margenesTxts" type="submit">CREATE </button>
+                                </div>
+                                
+                                </form> 
+                            </div>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <hr>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+    </div> 
+</div>
+
+
+<script type="text/javascript">
+var password = document.getElementById("user_om_password")
+  , confirm_password = document.getElementById("user_om_password2");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Las contraseñas no coinciden");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>

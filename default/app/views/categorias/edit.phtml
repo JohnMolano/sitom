@@ -1,0 +1,91 @@
+<?php View::content(); ?>
+    <div class="row mx-auto" >
+        <?php View::partial('menu', false,  array('activo'=>$activo)) ?>
+        <div class="col-12 col-lg-8 col-xl-8 colorCajasBlancas mx-auto">
+            <div class="row">
+                <div class="col">
+                    <h4 class="modal-title"><?= ucfirst(RENDER_URL['controller']);?></h4>
+                    <p class="txtsGrises">
+                        Para actualizar el registro deber llenar todo el formulario. 
+                        <span class="txtsOscurosColor">
+                            <strong>Recuerda que los usuarios son perfilados</strong> 
+                        </span>
+
+                    </p>
+                    <div class="row margenesTxts" >
+                        <div class="col margenesTxts">
+                            <div class="col padMar">
+                                <form id="contact-form" method="post" action="<?=APP_PAGE_OMOLDS;?><?= RENDER_URL['controller'];?>/<?= RENDER_URL['action']; ?>/<?= RENDER_URL['parameters'][0]; ?>" class="contact-form form">
+
+                                <?php $i=0; foreach ($listOmolds as $idVal => $itemCol) : ?>
+                                <?php $i2=0; foreach ($listOmolds->{$idVal} as $col => $item) : ?>
+                                  
+                                   
+                                <?php  if($col != 'base'){ ?>
+                                   <?php  switch($col){ 
+                                        case "icon": ?>
+                                            <label class="margenesTxts" style="width: 100%"><?= ucfirst($item) ?></label> 
+                                            <?php View::partial('icons', false,  array('actual'=>$listData->{$id}[$col])) ?>
+                                        <?php  break; ?>
+                                        <?php  case "id_key": ?>
+                                            <input type="hidden" id="<?= $item ?>" name="value_om[]" value="<?=$idCategoria?>" class="margenesEspacio inputLargo" >
+                                        <?php  break; ?>
+
+                                        <?php  case "join": ?>
+                                            <label class="margenesTxts" style="width: 100%"><?= ucfirst($col) ?></label> 
+                                            <select title="Selecciona" class="selectpicker" name="value_om[]">
+                                            <?php $itemJoin = Util::joinOm($col); 
+                                                
+                                                foreach ($itemJoin->value_om as $idVJoin => $itemJoinVal) :
+                                            ?>        
+                                                    <option value='<?= $itemJoinVal[0] ?>'><?= $itemJoinVal[0] ?></option>
+                                            <?php        
+                                                endforeach;
+                                            ?>
+                                            </select>
+                                        <?php  break; ?>
+
+                                        <?php  default: ?>
+                                            <label class="margenesTxts" style="width: 100%"><?= ucfirst($col) ?></label>
+
+                                            <input type="text" id="<?= $item ?>" name="value_om[]" value="<?= $listData->{$id}[$col] ?>" class="margenesEspacio inputLargo" required>
+                                        <?php  break; ?>
+                                    <?php  } ?> 
+
+                                    <input type="hidden"  name="column_om[]" value="<?= $item ?>">
+                                    <input type="hidden"  name="id_om[]" value="<?= $listData->{$id}['base']['id_om'][$i2] ?>">
+                                    <input type="hidden"  name="user_id_om[]" value="<?= $listData->{$id}['base']['user_id_om'] ?>">
+
+                                    <input type="hidden"  name="key_om[]" value="<?= $listData->{$id}['base']['key_om'] ?>">
+
+                                     <input type="hidden"  name="group_om[]" value="<?= $listData->{$id}['base']['group_om'] ?>">
+                                    <?php  $i2++; ?>
+                                <?php  } ?>   
+
+
+                                    
+                                 
+
+
+                                <?php  endforeach; break; ?>
+                                <?php $i++; endforeach; ?>
+
+                                <div class="col-12 text-center margenesTxts">
+                                   <button class="btn btn-primary margenesTxts" type="submit">UPDATE </button>
+                                </div>
+                                
+                                </form> 
+                            </div>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <hr>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+    </div> 
+</div>

@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"path": "/var/www/html/sitom"
+		}
+	],
+	"settings": {
+      "sublime-view-in-browser": {
+         "baseUrl": "http://localhost/sitom",
+         "basePath": "/var/www/html/sitom"
+      }
+  	}
+}

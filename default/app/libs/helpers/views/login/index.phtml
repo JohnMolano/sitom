@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col">
+        <div class="modal fade centro" role="dialog" tabindex="-1" id="modalRegister">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title txtsGrises">REGISTER </h6><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                    <div class="modal-body">
+                        <h2 class="titulos">Register form: </h2>
+                        <p class="text-left margenesEspacio">Write your information to be part of our community and have access to the system. </p>
+                        <div class="col padMar"><input type="text" placeholder="Name" class="margenesEspacio inputLargo"><input type="text" placeholder="Lastname" class="margenesEspacio inputLargo"><input type="text" placeholder="Email " class="margenesEspacio inputLargo">
+                            <input
+                                type="password" placeholder="Create a password" class="margenesEspacio inputLargo"><input type="password" placeholder="Confirm your password" class="margenesEspacio inputLargo"><input type="tel" placeholder="Mobile phone" class="margenesEspacio inputLargo"></div>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-primary btn-Oscuro" type="button">REGISTER </button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="modal fade centro" role="dialog" tabindex="-1" id="modalForgot">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title txtsGrises">REMEMBER PASSWORD </h6><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                    <div class="modal-body">
+                        <h2 class="titulos">Create a new password: </h2>
+                        <div class="col padMar"><input type="text" placeholder="Email " class="margenesEspacio inputLargo"></div>
+                        <p class="text-center margenesEspacio">The system will validate and send an email to the registered account to generate a new password. </p>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-primary btn-Oscuro" type="button">SEND </button></div>
+                </div>
+            </div>
+        </div>
+
+<div class="row col-md-5 col-lg-4 mx-auto colorCajasBlancas espacioArribaCajas padMar">
+  <form id="contact-form" method="post" action="<?=APP_PAGE_OMOLDS;?>login/valida" class="contact-form form">
+    <div class="col margenesCajas">
+        <div class="row">
+            <div class="col">
+                <h1 class="margenesTxts">Login</h1>
+                <hr>
+                <div class="row">
+                    <div class="col col-12"><input type="email" name="login" placeholder="Email" class="margenesEspacio inputLargo" required="required"></div>
+                    <div class="col col-12"><input type="password" name="password"  placeholder="Password" class="margenesEspacio inputLargo" required="required"></div>
+                </div>
+                <div class="form-check margenesTxts"><label class="form-check-label margenesEspacio"><input class="form-check-input" type="checkbox"> Remember me</label></div>
+                <p class="margenesTxts"><a href="#" data-toggle="modal" data-target="#modalForgot">¿Forgot password?</a></p>
+                <p class="margenesTxts"><a href="#" data-toggle="modal" data-target="#modalRegister">You don't have an account? Register now </a></p><button class="btn btn-primary" type="submit">ENTER </button></div>
+        </div>
+    </div>
+  </form>  
+</div>

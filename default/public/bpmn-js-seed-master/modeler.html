@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>bpmn-js seed</title>
+    <link rel="stylesheet" href="bower_components/bpmn-js/dist/assets/diagram-js.css?4">
+  <link rel="stylesheet" href="bower_components/bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css">
+  <style type="text/css">
+
+    html, body, #canvas {
+      height: 100%;
+      padding: 0;
+    }
+
+    #save-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+
+      border: solid 5px green;
+    }
+
+
+    #save-overlays {
+      position: absolute;
+      top: 20px;
+      right: 180px;
+
+      border: solid 5px green;
+    }
+
+    #form {
+      position: absolute;
+      top: 50px;
+      right: 20px;
+      z-index: 10;
+      border: solid 5px green;
+    }
+
+    .diagram-note {
+      background-color: #ff0060;
+      color: White;
+      border-radius: 5px;
+      font-family: Arial;
+      font-size: 12px;
+      padding: 5px;
+      min-height: 16px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .needs-discussion:not(.djs-connection) .djs-visual > :nth-child(1) {
+      stroke: #ff0060 !important; /* color elements as red */
+    }
+
+
+
+.logo-omolds2
+    {
+      font-family: "IconOmolds";
+      font-style: normal;
+      font-weight: normal;
+      speak: none;
+      display: inline-block;
+      text-decoration: inherit;
+      width: 1em;
+      margin-right: .2em;
+      text-align: center;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1em;
+      margin-left: .2em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      color:#ff0060;
+      font-size: 50px;
+    }
+    
+  </style>
+
+
+</head>
+<body>
+  <!-- element to draw bpmn diagram in -->
+  <div id="canvas"></div>
+  <button id="save-button">Save Diagram</button>
+  <button id="save-overlays">Json overlays</button>
+  
+  <form id="form" action="javascript: mandarForm(this)" method="POST" enctype="multipart/form-data">
+    <input type="file" name="bpmn" id="bpmn" />
+    <input type="submit" value="Enviar"  />
+    <span></span>
+  </form>
+
+  
+  <!-- scripts -->
+
+  <!-- bpmn-js modeler -->
+  <script src="bower_components/bpmn-js/dist/bpmn-modeler.js?17"></script>
+
+  <!-- application -->
+  <script src="jquery-3.2.1.min.js"></script>
+  <script src="modeler.js?18"></script>
+  <script >
+    
+
+  </script>
+  <script >
+   
+    function mandarForm(form){
+      
+      var form = document.forms.namedItem("form");
+      form.addEventListener('submit', function(ev) {
+
+        var oOutput = document.querySelector("span"),
+            oData = new FormData(form);
+
+        oData.append("CustomField", "This is some extra data");
+
+        var oReq = new XMLHttpRequest();
+        oReq.open("POST", "upload.php", true);
+        oReq.onload = function(oEvent) {
+          if (oReq.status == 200) {
+            
+            var myArr = JSON.parse(oReq.responseText);
+            if(myArr.ok){
+               oOutput.innerHTML = "Uploaded!";
+               $.get('bpmnUp/'+myArr.archivo, importXML, 'text');
+            }else{
+               oOutput.innerHTML = "Error";
+              
+            }
+           
+          } else {
+            oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
+          }
+        };
+
+        oReq.send(oData);
+        ev.preventDefault();
+      }, false);
+
+}
+
+    
+  </script>
+</body>
+</html>

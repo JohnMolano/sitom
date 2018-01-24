@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <meta charset=<?= APP_CHARSET ?> >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	
+  <title>Omolds</title>
+  <link rel="shortcut icon" href="//www.omolds.com/img/favicon.ico?01">
+  <link rel="stylesheet" href="<?=APP_PAGE_OMOLDS;?>css/kumbia.css">  
+  <link rel="stylesheet" href="<?=APP_PAGE_OMOLDS;?>fonts/font-awesome.min.css">  
+  <link rel="stylesheet" href="<?=APP_PAGE_OMOLDS;?>fonts/ionicons.min.css">  
+  <link rel="stylesheet" href="https://omolds.github.io/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?= APP_PAGE_OMOLDS ?>helpers/CssGenerate/<?= rand() ?>">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+
+  <?php if($CssModulo){  ?>
+    <?= $CssModulo ?>
+  <?php  }else{  ?>
+    
+  <?php  } ?>
+
+  <script src="https://omolds.github.io/assets/js/jquery.min.js"></script>
+ 
+
+
+
+  <?php if($JsModuloHead){  ?>
+    <?= $JsModuloHead ?>
+  <?php  }else{  ?>
+      
+
+  <?php  } ?>
+
+</head>
+<body>
+
+
+  <h1 class="headerOmolds text-center">
+      <svg class="iconProducto" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+         viewBox="0 0 44.2 51" style="enable-background:new 0 0 44.2 51;" xml:space="preserve">
+        <path  class="hexagono" d="M22.1,0L0,12.8v25.5L22.1,51l22.1-12.8V12.8L22.1,0z M38.7,35.1l-16.6,9.6L5.5,35.1V15.9l16.6-9.6l16.6,9.6
+          V35.1z"/>
+      </svg>
+      <span class="tituloProducto">OM</span><span class="tituloProductoOM">olds </span>
+  </h1>
+
+
+  <?php View::content() ?>
+
+
+  <footer class="footerOmolds">
+    <div class="col">
+        <p>Todos los derechos reservados por ©Omolds I <a href="https://www.omolds.com/home/" target="_blank">www.omolds.com </a>2017</p>
+    </div>
+  </footer>
+
+  <?php if($JsModuloBody){  ?>
+    <?= $JsModuloBody ?>
+  <?php  }else{  ?>
+    
+
+  <?php  } ?>
+
+  
+  <script src="https://omolds.github.io/assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+</body>
+</html>

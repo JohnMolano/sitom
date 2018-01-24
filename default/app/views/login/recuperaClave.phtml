@@ -1,0 +1,79 @@
+<?php View::content(); ?>
+<header class="header"><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+          <div class="container">
+            <div class="row">
+              <div class="col-6 pull-right"><img src="<?=APP_PAGE;?>img/logoOmoldsHome.png" alt="" style="width: 150px;" class="img-responsive"></div>
+              <div class="col-6 pull-left"><a href="<?=APP_PAGE;?>"><img src="<?=APP_PAGE;?>img/imgInicio.jpg" alt=""></a></div>
+            </div>
+          </div>
+
+</header>
+
+	
+<section id="login">
+    <div class="container clearfix">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="heading">NUEVA CLAVE</h2>
+          <div class="row">
+            <div class="col-md-2">&nbsp;</div>
+            <div class="col-md-8">
+              <form id="clave-form" method="post" action="<?=APP_PAGE;?>login/recuperaClave/<?=$clave?>" class="contact-form form">
+                <div class="controls">
+                  <div class="row">
+                    <div class="col-sm-12">
+                        
+                      <div class="form-group">
+                        <label for="surname">Clave Nueva*</label>
+                        <input type="password" name="claveNueva" id="claveNueva" placeholder="Escriba su clave" required="required" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                        
+                      <div class="form-group">
+                        <label for="surname">Comprueba Clave Nueva*</label>
+                        <input type="password" name="claveNuevaConfirm" id="claveNuevaConfirm" placeholder="Escriba su clave nuevamente" required="required" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                  	<div id="msjError"></div>
+                    <input type="submit" value="CAMBIAR" class="btn btn-primary btn-block">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-2">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $('#clave-form').on('submit', function(e) {
+          var newPassword = $('#claveNueva').val();
+          var newPasswordConfirm = $('#claveNuevaConfirm').val();
+          if(newPassword !== newPasswordConfirm) {
+              e.preventDefault(); // previene el submit
+              // mostrar mensaje de error
+              $('#msjError').html('').html('<div class="alert alert-danger">Error: las claves no son iguales</div>');
+          } else {
+              $('#msjError').html('');
+              $('#registro-form').submit(); // envia los datos
+          }
+      });
+    </script>
+</section>
+
+<footer>
+<div class="container">
+<div class="row copyright">
+  <div class="col-md-6">
+    <p class="roboto">&copy;2016 OMolds</p>
+  </div>
+  <div class="col-md-6">
+    <p class="credit roboto"><a href="http://bootstrapious.com/portfolio-themes">Bootstrap Sources</a></p>
+    <!-- Please do not remove the backlink to us. It is part of the licence conditions. Thanks for understanding :)-->
+  </div>
+</div>
+</div>
+</footer>
